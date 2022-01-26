@@ -16,7 +16,7 @@ public class ApplicationImpl implements Application {
 	
 	
 	public void run(String[] args) {
-		Bookings bookingsimpl = new BookingsImpl();
+		GenericList<Booking> bookingsimpl = new GenericListImpl<Booking>();
 		BookingsView bookingsviewimpl = new BookingsViewImpl(bookingsimpl);
 		
 		
