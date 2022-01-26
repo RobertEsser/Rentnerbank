@@ -61,63 +61,6 @@ public class BookingsViewImpl implements BookingsView {
 		}
 	}
 
-	/*
-	 * private void showOne() { Scanner scannerAdd = new Scanner(System.in);
-	 * System.out.println("Wähle eine Transaktion aus: "); int position =
-	 * scannerAdd.nextInt(); scannerAdd.nextLine(); ArrayList allTrans =
-	 * bookingsimpl.get(); TransactionView transabookingsimplctionView = new
-	 * TransactionView(this, (Transaction) allTrans.get(position));
-	 * transactionView.menu(); }
-	 */
-
-	private void add() {
-		LocalDateTime datum = LocalDateTime.now();
-		Scanner scannerAdd = new Scanner(System.in);
-		System.out.println("Wie viel soll überwiesen werden: ");
-
-		while (!scannerAdd.hasNextFloat()) {
-			System.out.println("Es wurde kein gültiger Betrag eingegeben. Bitte um neue Eingabe: ");
-			scannerAdd.next();
-		}
-		float betrag = scannerAdd.nextFloat();
-
-		scannerAdd.nextLine();
-		System.out.println("Empfänger: ");
-		String empfaenger = scannerAdd.nextLine();
-		System.out.println("IBAN: ");
-		String iban = scannerAdd.nextLine();
-		System.out.println("BIC: ");
-		String bic = scannerAdd.nextLine();
-		System.out.println("Verwendungszweck: ");
-		String verwendungszweck = scannerAdd.nextLine();
-		
-		Booking bookingimpl = new BookingImpl(betrag, empfaenger, iban, bic, verwendungszweck, datum);
-		bookingsimpl.add(bookingimpl);
-		// scannerAdd.close();
-	}
-
-	private void showAll() {
-
-		for (Object o : bookingsimpl) {
-			Booking tempTrans = (Booking) o;
-			System.out.println(bookingsimpl.getIndex(tempTrans) + "-" + tempTrans.getEmpfaenger() + " - "
-					+ tempTrans.getVerwendungszweck() + " - " + String.format("%.2f", tempTrans.getBetrag()) + "€");
-		}
-
-	}
-
-	private void showOne() {
-		Scanner scannershowOne = new Scanner(System.in);
-		System.out.println("Wähle den gewünschten Datensatz aus: ");
-		int index = scannershowOne.nextInt();
-		scannershowOne.nextLine();
-		Booking temp = bookingsimpl.getOneObject(index);
-
-		BookingView bookingviewimpl = new BookingViewImpl(temp);
-		bookingviewimpl.show();
-
-	}
-	
 	private void download() {
 		try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
 
@@ -164,6 +107,65 @@ public class BookingsViewImpl implements BookingsView {
 			System.out.println(e.getMessage());
 		}
 
+				
+	}
+
+	/*
+	 * private void showOne() { Scanner scannerAdd = new Scanner(System.in);
+	 * System.out.println("Wähle eine Transaktion aus: "); int position =
+	 * scannerAdd.nextInt(); scannerAdd.nextLine(); ArrayList allTrans =
+	 * bookingsimpl.get(); TransactionView transabookingsimplctionView = new
+	 * TransactionView(this, (Transaction) allTrans.get(position));
+	 * transactionView.menu(); }
+	 */
+
+	private void add() {
+		LocalDateTime datum = LocalDateTime.now();
+		Scanner scannerAdd = new Scanner(System.in);
+		System.out.println("Wie viel soll überwiesen werden: ");
+
+		while (!scannerAdd.hasNextFloat()) {
+			System.out.println("Es wurde kein gültiger Betrag eingegeben. Bitte um neue Eingabe: ");
+			scannerAdd.next();
+		}
+		float betrag = scannerAdd.nextFloat();
+
+		scannerAdd.nextLine();
+		System.out.println("Empfänger: ");
+		String empfaenger = scannerAdd.nextLine();
+		System.out.println("IBAN: ");
+		String iban = scannerAdd.nextLine();
+		System.out.println("BIC: ");
+		String bic = scannerAdd.nextLine();
+		System.out.println("Verwendungszweck: ");
+		String verwendungszweck = scannerAdd.nextLine();
+		
+		Booking bookingimpl = new BookingImpl(betrag, empfaenger, iban, bic, verwendungszweck, datum);
+		bookingsimpl.add(bookingimpl);
+		// scannerAdd.close();
+	}
+
+	private void showAll() {
+
+		for (Object o : bookingsimpl) {
+			Booking tempTrans = (Booking) o;
+			System.out.println(bookingsimpl.getIndex(tempTrans) + "-" + tempTrans.getEmpfaenger() + " - "
+					+ tempTrans.getVerwendungszweck() + " - " + String.format("%.2f", tempTrans.getBetrag()) + "€");
+		}
+
+	private void showOne() {
+		Scanner scannershowOne = new Scanner(System.in);
+		System.out.println("Wähle den gewünschten Datensatz aus: ");
+		int index = scannershowOne.nextInt();
+		scannershowOne.nextLine();
+		Booking temp = bookingsimpl.getOneObject(index);
+
+		BookingView bookingviewimpl = new BookingViewImpl(temp);
+		bookingviewimpl.show();
+
+	}
+	
+	
 				
 	}
 }
