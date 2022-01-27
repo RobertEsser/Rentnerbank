@@ -13,12 +13,14 @@ import de.telekom.sea7.Booking;
 import de.telekom.sea7.BookingView;
 import de.telekom.sea7.Bookings;
 import de.telekom.sea7.BookingsView;
+import de.telekom.sea7.GenericList;
+import de.telekom.sea7.Model.BookingImpl;
 
 public class BookingsViewImpl implements BookingsView {
 
-	private Bookings bookingsimpl;
+	private  GenericList<Booking> bookingsimpl;
 
-	public BookingsViewImpl(Bookings bookingsimpl) {
+	public BookingsViewImpl(GenericList<Booking> bookingsimpl) {
 		this.bookingsimpl = bookingsimpl;
 	}
 
@@ -137,9 +139,10 @@ public class BookingsViewImpl implements BookingsView {
 		String bic = scannerAdd.nextLine();
 		System.out.println("Verwendungszweck: ");
 		String verwendungszweck = scannerAdd.nextLine();
-
-		bookingsimpl.add(betrag, empfaenger, iban, bic, verwendungszweck, datum);
-		// scannerAdd.("1");close();
+		
+		Booking bookingimpl = new BookingImpl(betrag, empfaenger, iban, bic, verwendungszweck, datum);
+		bookingsimpl.add(bookingimpl);
+		// scannerAdd.close();
 	}
 
 	private void showAll() {
@@ -150,17 +153,19 @@ public class BookingsViewImpl implements BookingsView {
 					+ tempTrans.getVerwendungszweck() + " - " + String.format("%.2f", tempTrans.getBetrag()) + "€");
 		}
 
-	}
-
 	private void showOne() {
 		Scanner scannershowOne = new Scanner(System.in);
 		System.out.println("Wähle den gewünschten Datensatz aus: ");
 		int index = scannershowOne.nextInt();
 		scannershowOne.nextLine();
-		Booking temp = bookingsimpl.getBooking(index);
+		Booking temp = bookingsimpl.getOneObject(index);
 
 		BookingView bookingviewimpl = new BookingViewImpl(temp);
 		bookingviewimpl.show();
 
+	}
+	
+	
+				
 	}
 }
